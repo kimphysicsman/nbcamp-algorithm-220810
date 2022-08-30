@@ -57,12 +57,14 @@ def dfs_order(graph_dict, start_num):
 
 
 def main():
-    [n, m, v] = [int(item) for item in input("input N, M, V : ").split()]
+    # [n, m, v] = [int(item) for item in input("input N, M, V : ").split()]
+    [n, m, v] = [int(item) for item in input().split()]
 
     graph = dict()
 
     for _ in range(m):
-        [s, e] = [int(item) for item in input("input Edge (V1, V2) : ").split()]
+        # [s, e] = [int(item) for item in input("input Edge (V1, V2) : ").split()]
+        [s, e] = [int(item) for item in input().split()]
 
         edge_list = graph.get(s, None)
         if edge_list is None:
@@ -76,8 +78,23 @@ def main():
         else:
             graph[e].append(s)
 
-    print(dfs_order(graph, v))
-    print(bfs_order(graph, v))
+    dfs_str = ""
+    dfs_list = dfs_order(graph, v)
+    for i, w in enumerate(dfs_list):
+        dfs_str += str(w)
+        if i + 1 == len(dfs_list):
+            break
+        dfs_str += " "
 
+    bfs_str = ""
+    bfs_list = bfs_order(graph, v)
+    for i, w in enumerate(bfs_list):
+        bfs_str += str(w)
+        if i + 1 == len(bfs_list):
+            break
+        bfs_str += " "
+
+    print(dfs_str)
+    print(bfs_str)
 
 main()

@@ -15,6 +15,9 @@
 # 출력
 # 출력해야하는 명령이 주어질 때마다, 한 줄에 하나씩 출력한다.
 
+
+import sys
+
 class Node:
     def __init__(self, value):
         self.value = value
@@ -23,10 +26,12 @@ class Node:
 
 class Queue:
     def __init__(self):
+        self.size = 0
         self.head = None
         self.tail = None
 
     def push(self, value):
+        self.size += 1
         if self.head is None:
             self.head = Node(value)
             self.tail = self.head
@@ -36,6 +41,7 @@ class Queue:
             self.tail = new_tail
 
     def pop(self):
+        self.size -= 1
         if self.head is None:
             return -1
 
@@ -44,15 +50,9 @@ class Queue:
 
         return old_head_value
 
-    def size(self):
-        count = 0
-        cur_node = self.head
+    def size_(self):
 
-        while cur_node is not None:
-            cur_node = cur_node.next
-            count += 1
-
-        return count
+        return self.size
 
     def empty(self):
         if self.head is None:
@@ -73,16 +73,18 @@ class Queue:
 def main():
     queue = Queue()
 
-    n = int(input("input N : "))
+    # n = int(input("input N : "))
+    n = int(sys.stdin.readline())
 
     for _ in range(n):
-        command = input("input Command : ").split()
+        # command = input("input Command : ").split()
+        command = sys.stdin.readline().split()
         if command[0] == "push":
             queue.push(command[1])
         elif command[0] == "pop":
             print(queue.pop())
         elif command[0] == "size":
-            print(queue.size())
+            print(queue.size_())
         elif command[0] == "empty":
             if queue.empty():
                 print("1")

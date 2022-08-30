@@ -19,6 +19,8 @@
 #
 # 넷째 줄에는 범위를 출력한다.
 
+import sys
+
 def merge_array(array1, array2):
     array1_idx = 0
     array2_idx = 0
@@ -69,12 +71,32 @@ def average(num_list):
 def middle_num(num_list):
     middle_idx = int(len(num_list) / 2)
 
-    sorted_list = merge_sort(num_list)
+    # sorted_list = merge_sort(num_list)
+    num_list.sort()
 
-    return sorted_list[middle_idx]
+    return num_list[middle_idx]
 
 
 def max_frequency_num(num_list):
+
+    # freq_list = [0 for _ in range(4000 * 2 + 1)]
+    #
+    # for num in num_list:
+    #     freq_list[num + 4000] += 1
+    #
+    # max_freq = max(freq_list)
+    #
+    # max_freq_list = []
+    # for i, freq in enumerate(freq_list):
+    #     if freq == max_freq:
+    #         max_freq_list.append(i - 4000)
+    #
+    # if len(max_freq_list) == 1:
+    #     return max_freq_list[0]
+    #
+    # max_freq_list.sort()
+    #
+    # return max_freq_list[1]
     freq_dict = dict()
 
     for num in num_list:
@@ -107,14 +129,17 @@ def range_of_list(num_list):
     if len(num_list) <= 1:
         return 0
 
-    sorted_list = merge_sort(num_list)
-    return sorted_list[-1] - sorted_list[0]
+    # sorted_list = merge_sort(num_list)
+    # return sorted_list[-1] - sorted_list[0]
 
+    max_num = max(num_list)
+    min_num = min(num_list)
+    return max_num - min_num
 
 def main():
-    n = int(input("input N : "))
+    n = int(input())
 
-    num_list = [int(input("input Number : ")) for _ in range(n)]
+    num_list = [int(sys.stdin.readline()) for _ in range(n)]
 
     print(average(num_list))
     print(middle_num(num_list))
